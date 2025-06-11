@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>رسالة من فاطمه 💖</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+    }
+
+    .question {
+      background-color: #ffe6f0;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .question h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      background-color: #f8d7da;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    label:hover {
+      background-color: #f5c6cb;
+    }
+
+    .response-box {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #d63384;
+      border-radius: 8px;
+      color: #d63384;
+      font-weight: bold;
+    }
+
+    .text-area {
+      margin-top: 10px;
+    }
+
+    .text-area textarea {
+      width: 100%;
+      max-width: 300px;
+      height: 40px;
+      resize: none;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      padding: 5px;
+      font-family: inherit;
+    }
+
+    .effect {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      pointer-events: none;
+      animation: floatUp 1.5s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -200%) scale(1.5);
+      }
+    }
+
+    .message {
+      position: fixed;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffb6c1;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 20px;
+      color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      animation: fadeOut 2s ease forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>من فاطمه 💌</h1>
+
+  <div class="question">
+    <h2>1. مين تحبي أكثر؟</h2>
+    <div class="options">
+      <label><input type="radio" name="q1" value="يزن" onclick="showEffect('yazan')"> يزن</label>
+      <label><input type="radio" name="q1" value="كوست" onclick="showEffect('kost')"> كوست</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <h2>2. عادي أقولك قدام كوست "أحبك"؟</h2>
+    <div class="options">
+      <label>
+        <input type="radio" name="q2" value="نعم" onclick="handleLoveAnswer('yes')"> نعم
+      </label>
+      <label>
+        <input type="radio" name="q2" value="لا" onclick="handleLoveAnswer('no')"> لا
+      </label>
+    </div>
+    <div id="love-response"></div>
+  </div>
+
+  <div class="question">
+    <h2>3. عادي لما أقولك "أريد حضن" بأي وقت، لا تقولي لا؟</h2>
+    <div class="options">
+      <label><input type="radio" name="q3" onclick="handleHugAnswer('yes')"> أكيد عادي</label>
+      <label><input type="radio" name="q3" onclick="handleHugAnswer('no')"> لا، مو عادي</label>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 فاطمه 💖
+  </footer>
+
+  <script>
+    function showEffect(choice) {
+      let emoji = '';
+      let messageText = '';
+      let color = '';
+
+      if (choice === 'yazan') {
+        emoji = '💖';
+        messageText = 'شكراً 💖';
+        color = '#e255a1';
+      } else if (choice === 'kost') {
+        emoji = '💔';
+        messageText = 'مع الأسف 🥺😕';
+        color = '#c0392b';
+      }
+
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'effect';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = (Math.random() * 0.5) + 's';
+        heart.style.color = color;
+        heart.textContent = emoji;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1500);
+      }
+
+      const message = document.createElement('div');
+      message.className = 'message';
+      message.style.backgroundColor = color;
+      message.textContent = messageText;
+      document.body.appendChild(message);
+      setTimeout(() => message.remove(), 2000);
+    }
+
+    function handleLoveAnswer(answer) {
+      const container = document.getElementById("love-response");
+      container.innerHTML = ""; // clear old content
+
+      if (answer === "yes") {
+        const msg = document.createElement("div");
+        msg.className = "response-box";
+        msg.textContent = "لك والله أروحلك فدوة 💘";
+        container.appendChild(msg);
+      } else if (answer === "no") {
+        const msg = document.createElement("div");
+        msg.className = "response-box";
+        msg.textContent = "طيب ليش؟ 🥺";
+        container.appendChild(msg);
+
+        const textareaWrapper = document.createElement("div");
+        textareaWrapper.className = "text-area";
+
+        const textarea = document.createElement("textarea");
+        textarea.placeholder = "اكتبي السبب هنا...";
+        textareaWrapper.appendChild(textarea);
+
+        container.appendChild(textareaWrapper);
+      }
+    }
+
+    function handleHugAnswer(choice) {
+      // Remove any existing message first
+      const oldMsg = document.querySelector('.hug-message');
+      if (oldMsg) oldMsg.remove();
+
+      const msg = document.createElement("div");
+      msg.className = "message hug-message";
+      msg.style.backgroundColor = "#d63384"; // وردي موحد
+
+      if (choice === 'yes') {
+        msg.textContent = "لك والله أحلى بنت وفديت هالخصر الجميل والوجه الجميل، لك والله انتي عسل 🍯💖";
+      } else if (choice === 'no') {
+        msg.textContent = "لك والله عاد ما أمل منك، والله لك ارجعي فكري أكثر وجاوبي 🥺";
+      }
+
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 12000); // 12 ثانية
+    }
+  </script>
+
+</body>
+  </html>
